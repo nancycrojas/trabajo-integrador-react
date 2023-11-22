@@ -5,13 +5,17 @@ import { TaskList } from "./components/TaskList";
 
 function App() {
   const [tasks, setTasks] = useState([]);
-
+ useEffect(()=>{
+  let data=localStorage.getItem('tasks')
+  if(data){setTasks(JSON.parse(data))}
+ },[])
+ 
   useEffect(() => {
-    console.log("Tareas actualizadas:", tasks);
+    localStorage.setItem('tasks',JSON.stringify(tasks))
   }, [tasks]);
 
-  const addTask = (taskName) => {
-    const newTask = { id: Date.now(), name: taskName, completed: false };
+  const addTask = (taskName,taskDescription) => {
+    const newTask = { id: Date.now(), name: taskName,description:taskDescription, completed: false };
     setTasks([...tasks, newTask]);
   };
 
@@ -37,7 +41,12 @@ function App() {
         tasks={tasks}
         toggleTaskCompleted={toggleTaskCompleted}
         deleteTask={deleteTask}
-      />
+      /><TaskList
+      tasks={tasks}
+      toggleTaskCompleted={toggleTaskCompleted}
+      deleteTask={deleteTask}
+      taskCompleted={true}
+    />
     </Container>
   );
 }

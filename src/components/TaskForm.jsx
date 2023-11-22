@@ -3,12 +3,14 @@ import { useState } from "react";
 
 export const TaskForm = ({ addTask }) => {
   const [taskName, setTaskName] = useState("");
+  const [taskDescription, setTaskDescription] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addTask(taskName);
+    addTask(taskName,taskDescription);
     setTaskName("");
-    console.log(taskName);
+    setTaskDescription('')
+    console.log(taskName,taskDescription);
   };
 
   return (
@@ -21,6 +23,17 @@ export const TaskForm = ({ addTask }) => {
           type="text"
           value={taskName}
           onChange={(e) => setTaskName(e.target.value)}
+          sx={{
+            boxShadow: "0 4px 8px 0 rgba(0,0,0,0.2)",
+          }}
+        />
+             <TextField
+          fullWidth
+          id="standard-basic"
+          label="decripcion"
+          type="text"
+          value={taskDescription}
+          onChange={(e) => setTaskDescription(e.target.value)}
           sx={{
             boxShadow: "0 4px 8px 0 rgba(0,0,0,0.2)",
           }}

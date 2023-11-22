@@ -22,7 +22,9 @@ export const TaskItem = ({ task, toggleTaskCompleted, deleteTask }) => {
           style={{ textDecoration: task.completed ? "line-through" : "none" }}
         >
           {task.name}
+          
         </Typography>
+        <div>{task.description}</div>
       </CardContent>
       <CardActions>
         <Button
