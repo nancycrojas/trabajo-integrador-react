@@ -7,10 +7,9 @@ export const TaskForm = ({ addTask }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addTask(taskName,taskDescription);
+    addTask(taskName, taskDescription);
     setTaskName("");
-    setTaskDescription('')
-    console.log(taskName,taskDescription);
+    setTaskDescription("");
   };
 
   return (
@@ -27,10 +26,10 @@ export const TaskForm = ({ addTask }) => {
             boxShadow: "0 4px 8px 0 rgba(0,0,0,0.2)",
           }}
         />
-             <TextField
+        <TextField
           fullWidth
           id="standard-basic"
-          label="decripcion"
+          label="Descripción"
           type="text"
           value={taskDescription}
           onChange={(e) => setTaskDescription(e.target.value)}

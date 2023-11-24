@@ -1,22 +1,32 @@
-import { Container, Typography } from "@mui/material";
+import { Container, Snackbar, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { TaskForm } from "./components/TaskForm";
 import { TaskList } from "./components/TaskList";
 
 function App() {
   const [tasks, setTasks] = useState([]);
- useEffect(()=>{
-  let data=localStorage.getItem('tasks')
-  if(data){setTasks(JSON.parse(data))}
- },[])
- 
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+
   useEffect(() => {
-    localStorage.setItem('tasks',JSON.stringify(tasks))
+    let data = localStorage.getItem("tasks");
+    if (data) {
+      setTasks(JSON.parse(data));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
 
-  const addTask = (taskName,taskDescription) => {
-    const newTask = { id: Date.now(), name: taskName,description:taskDescription, completed: false };
+  const addTask = (taskName, taskDescription) => {
+    const newTask = {
+      id: Date.now(),
+      name: taskName,
+      description: taskDescription,
+      completed: false,
+    };
     setTasks([...tasks, newTask]);
+    setOpenSnackbar(true);
   };
 
   const toggleTaskCompleted = (taskId) => {
@@ -41,12 +51,19 @@ function App() {
         tasks={tasks}
         toggleTaskCompleted={toggleTaskCompleted}
         deleteTask={deleteTask}
-      /><TaskList
-      tasks={tasks}
-      toggleTaskCompleted={toggleTaskCompleted}
-      deleteTask={deleteTask}
-      taskCompleted={true}
-    />
+      />
+      <TaskList
+        tasks={tasks}
+        toggleTaskCompleted={toggleTaskCompleted}
+        deleteTask={deleteTask}
+        taskCompleted={true}
+      />
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={3000}
+        onClose={() => setOpenSnackbar(false)}
+        message="Tarea agregada correctamente"
+      />
     </Container>
   );
 }
