@@ -41,23 +41,40 @@ function App() {
     setTasks(updatedTasks);
   };
 
+  const pendingTasks = tasks.filter((task) => !task.completed);
+  const completedTasks = tasks.filter((task) => task.completed);
+
   return (
     <Container maxWidth="xl">
-      <Typography variant="h3" mt={6}>
+      <Typography variant="h4" mt={6}>
         Lista de tareas
       </Typography>
       <TaskForm addTask={addTask} />
-      <TaskList
-        tasks={tasks}
-        toggleTaskCompleted={toggleTaskCompleted}
-        deleteTask={deleteTask}
-      />
-      <TaskList
-        tasks={tasks}
-        toggleTaskCompleted={toggleTaskCompleted}
-        deleteTask={deleteTask}
-        taskCompleted={true}
-      />
+      {pendingTasks.length > 0 && (
+        <>
+          <Typography variant="h5" mt={4}>
+            Tareas Pendientes
+          </Typography>
+          <TaskList
+            tasks={pendingTasks}
+            toggleTaskCompleted={toggleTaskCompleted}
+            deleteTask={deleteTask}
+          />
+        </>
+      )}
+      {completedTasks.length > 0 && (
+        <>
+          <Typography variant="h5" mt={4}>
+            Tareas Completadas
+          </Typography>
+          <TaskList
+            tasks={completedTasks}
+            toggleTaskCompleted={toggleTaskCompleted}
+            deleteTask={deleteTask}
+            taskCompleted={true}
+          />
+        </>
+      )}
       <Snackbar
         open={openSnackbar}
         autoHideDuration={3000}

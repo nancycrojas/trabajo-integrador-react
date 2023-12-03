@@ -17,6 +17,7 @@ export const TaskForm = ({ addTask }) => {
       <Grid container mt={4} gap={4}>
         <TextField
           fullWidth
+          autoComplete="false"
           id="standard-basic"
           label="Agregar una nueva tarea"
           type="text"
@@ -25,6 +26,7 @@ export const TaskForm = ({ addTask }) => {
           sx={{
             boxShadow: "0 4px 8px 0 rgba(0,0,0,0.2)",
           }}
+          required={true}
         />
         <TextField
           fullWidth
@@ -36,6 +38,7 @@ export const TaskForm = ({ addTask }) => {
           sx={{
             boxShadow: "0 4px 8px 0 rgba(0,0,0,0.2)",
           }}
+          required={true}
         />
         <Button type="submit" variant="contained" color="secondary">
           Agregar tarea
